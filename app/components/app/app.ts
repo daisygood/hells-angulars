@@ -8,7 +8,6 @@ import {Auth} from "../../auth/auth.service";
   templateUrl: 'app.html',
   styleUrls: [ 'app.css' ]
 })
-
 export class App {
   title: "Gear Box";
 
