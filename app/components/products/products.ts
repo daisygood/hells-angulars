@@ -5,14 +5,14 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   moduleId: module.id,
   selector: 'products',
-  templateUrl: 'products.component.html',
-  styleUrls: ['products.component.css'],
+  templateUrl: 'products.html',
+  styleUrls: ['products.css'],
   providers: [NgbRatingConfig]
 })
 
-export class ProductsComponent implements OnInit {
+export class Products implements OnInit {
   products: Array<any>;
-  
+
   constructor(
     private productsService: ProductsService,
     private config: NgbRatingConfig
@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
     config.max = 5;
     config.readonly = true;
   }
-  
+
   getProducts() {
     this.productsService
         .getProducts()
