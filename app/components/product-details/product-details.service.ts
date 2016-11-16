@@ -12,14 +12,16 @@ export class ProductDetailsService {
     private http: Http
   ){}
 
-  public getProducts(): Promise<any>{
-    return Promise.resolve(Data)
-    // return this.http.get('/api/products')
+  public getProductDetails(id: any): Promise<any>{
+    let product = Data.filter(product => product.id === id);
+    return Promise.resolve(product);
+
+    // let url = '/api/products/' + id;
+    // return this.http.get(url)
     //               .toPromise()
     //               .then(response => response.json())
     //               .catch(this.handleError);
   }
-
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
   }

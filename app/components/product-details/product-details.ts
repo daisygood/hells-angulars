@@ -5,8 +5,8 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   moduleId: module.id,
   selector: 'products',
-  templateUrl: 'products.html',
-  styleUrls: ['products.css'],
+  templateUrl: 'product-details.html',
+  styleUrls: ['product-details.css'],
   providers: [NgbRatingConfig]
 })
 

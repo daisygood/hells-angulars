@@ -28,4 +28,7 @@ ngb-rating{
   color: darkblue;
   font-size: 13px
 }
+.card {
+  cursor: pointer;
+}
 

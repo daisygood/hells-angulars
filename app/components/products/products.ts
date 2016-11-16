@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './products.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import {UIROUTER_DIRECTIVES} from 'ui-router-ng2';
 
 @Component({
   moduleId: module.id,

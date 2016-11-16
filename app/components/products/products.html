@@ -55,7 +55,7 @@
     <div class="col-md-9">
       <div *ngFor="let row of products" class="row">
         <div *ngFor="let product of row" class="col-md-4">
-          <div class="card">
+          <div class="card" uiSref="productDetails" [uiParams]="{ productId: product.id }">
             <img class="card-img-top" [src]="product.pic" alt="image">
             <div class="card-block">
               <p class="right card-text"><strong>${{product.priceperday}}</strong> / day</p>

@@ -12,17 +12,18 @@ import "rxjs/add/operator/toPromise";
 
 import {Home} from "./components/home/home.js";
 import {About} from "./components/about.js";
-import { Products } from './components/products/products'
+import { Products } from './components/products/products';
+import { ProductDetails } from './components/product-details/product-details';
 import {MyUIRouterConfig} from "./config/router.config.js";
-import {homeState, productsState} from "./states.js";
+import {homeState, productsState, productDetailsState } from "./states.js";
 
 import { ProductsService } from "./components/products/products.service";
 import { ProductDetailsService } from "./components/product-details/product-details.service";
 
 import { AUTH_PROVIDERS }      from 'angular2-jwt';
 
-let INITIAL_STATES =  [ homeState, productsState ];
-let INITIAL_COMPONENTS =  [ App, Home, Products ];
+let INITIAL_STATES =  [ homeState, productsState, productDetailsState ];
+let INITIAL_COMPONENTS =  [ App, Home, Products,  ProductDetails];
 
 @NgModule({
   imports: [
