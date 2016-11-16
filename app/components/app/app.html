@@ -5,10 +5,10 @@
       <a class="nav-link bg-none" uiSref="home" uiSrefActive="active"> Home </a>
     </li>
     <li class="nav-item">
-      <a uiSref="gear" uiSrefActive="active">Gear</a>
+      <a uiSref="products" uiSrefActive="active">Gear</a>
     </li>
   </ul>
-  <button class="navbar-right float-xs-right" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+  <button class="navbar-right float-xs-right" (click)="auth.login()" *ngIf="auth.authenticated()">Log In</button>
   <button class="navbar-right float-xs-right" (click)="auth.logout()" *ngIf="!auth.authenticated()">Log Out</button>
   <form class="form-inline float-xs-right">
     <input type="text" class="form-control" placeholder="Dig in the Gear Box...">

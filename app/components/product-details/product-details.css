@@ -1,0 +1,61 @@
+img {
+  max-width: 100%;
+}
+
+.preview {
+  margin-bottom: 20px;
+}
+
+.nav-tabs {
+  border: none;
+  margin-top: 15px;
+}
+
+.nav-tabs li {
+  width: 25%;
+  display: inline-block;
+  margin-left: 20px;
+}
+.nav-tabs li img {
+  max-width: 100%;
+}
+
+.preview-pic {
+  overflow: hidden;
+}
+.tab-content img {
+  width: 100%;
+}
+
+.card {
+  margin-top: 50px;
+  padding: 3em;
+  line-height: 1.5em;
+}
+
+ngb-rating, .fa-map-marker{
+  color: #579ed1;
+}
+
+.product-title, .price {
+  text-transform: UPPERCASE;
+  font-weight: bold;
+}
+
+.product-title, .rating, .product-description, .price {
+  margin-bottom: 15px;
+}
+
+.rent, .like {
+  background: #579ed1;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+}
+
+.rent:hover{
+  background: darkblue;
+  color: #fff;
+}

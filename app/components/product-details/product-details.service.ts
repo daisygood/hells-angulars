@@ -8,6 +8,7 @@ import { Data } from '../../data/dummydata';
 @Injectable()
 
 export class ProductDetailsService {
+
   constructor(
     private http: Http
   ){}

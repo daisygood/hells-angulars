@@ -1,5 +1,52 @@
-<h3>A product!</h3>
+<div class="card">
+  <div class="container">
+    <div class="wrapper row">
+      <div class="preview col-md-6">
+        <div class="preview-pic">
+          <img [src]="selectedPic" />
+        </div>
+        <ul class="nav nav-tabs">
+          <li><a (click)="onSelect(1)"><img [src]="product.pic[1]" /></a></li>
+          <li><a (click)="onSelect(2)"><img [src]="product.pic[2]" /></a></li>
+          <li><a (click)="onSelect(3)"><img [src]="product.pic[3]" /></a></li>
+        </ul>
+      </div>
 
-<div>Id: {{product.id}}</div>
+      <div class="details col-md-6">
+        <h3 class="product-title">{{product.productname}}</h3>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{product.location}}</p>
+        <div class="rating">
+          <ngb-rating [(rate)]="product.rating"></ngb-rating>
+          <span>  reviews</span>
+        </div>
 
-<button uiSref="products">Go Back</button>
+        <p class="product-description">{{product.description}}</p>
+        <h4 class="price"><span>$ {{product.priceperday}}</span> per day</h4>
+        <div class="form-group">
+          <label for="datefrom" class="control-label">From</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #df="ngbDatepicker">
+            <div class="input-group-addon" (click)="df.toggle()" >
+              <i class="fa fa-calendar"></i>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dateto" class="control-label">To</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"  ngbDatepicker #dt="ngbDatepicker">
+              <div class="input-group-addon" (click)="dt.toggle()" >
+                <i class="fa fa-calendar"></i>
+              </div>
+            </div>
+          </div>
+
+
+          <button class="rent btn btn-default pull-right">Rent</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
