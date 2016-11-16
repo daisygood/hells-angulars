@@ -12,9 +12,10 @@ export class ProductDetailsService {
     private http: Http
   ){}
 
-  public getProductDetails(id: any): Promise<any>{
-    let product = Data.filter(product => product.id === id);
-    return Promise.resolve(product);
+  public getProductDetails(id: any) {
+    console.log(id);
+    let productDetail = Data.filter(product => product.id === id);
+    return productDetail[0];
 
     // let url = '/api/products/' + id;
     // return this.http.get(url)

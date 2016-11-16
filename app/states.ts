@@ -12,7 +12,8 @@ export const homeState = { name: 'home', url: '/',  component: Home };
 export const productsState = {
   name: 'products',
   url: '/products',
-  component: Products
+  component: Products,
+
 };
 
 export const productDetailsState = {
@@ -21,9 +22,9 @@ export const productDetailsState = {
   component: ProductDetails,
   resolve: [
     {
-      token: 'productDetails',
+      token: 'product',
       deps: [Transition, ProductDetailsService],
-      resolveFn: (trans, productSvc) => productSvc.getProductDetails(trans.params().productId)
+      resolveFn: (trans, productDetailsSvc) => productDetailsSvc.getProductDetails(trans.params().productId)
     }
   ]
 };
