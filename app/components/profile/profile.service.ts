@@ -44,6 +44,17 @@ export class ProfileService {
     return Promise.resolve(Rentals);
   }
 
+  public getUserTransactions(userId): Promise<any> {
+
+    userId = JSON.stringify(userId);
+    return this.http.get(`/api/transactions/${userId}`)
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
+
   // public getUserRatingAsBuyer(): Promise<any> {
 
   // }

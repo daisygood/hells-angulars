@@ -14,9 +14,10 @@ export class ProfileComponent implements OnInit {
   public user: any;
   public products: Array<any>;
   public rentals: Array<any>;
+  public transactions: Array<any>;
+  public completedTransactions: Array<any>;
   public userId: string;
-  public gearView: boolean = true;
-  public rentalView: boolean = false;
+  public availableFunds: Number;
   private stripeAccount: any;
 
   constructor(
@@ -36,8 +37,8 @@ export class ProfileComponent implements OnInit {
         this.user = user;
         this.stripeAccount = user.stripeaccountid;
         this.getUserProducts(this.user.id);
-
         this.getUserRentals();
+        this.getUserTransactions(this.user.id);
       })
       .catch(err => console.log(err));
   }
@@ -61,16 +62,27 @@ export class ProfileComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  selectGearView() {
-    this.rentalView = false;
-    this.gearView = true;
-    return "active";
+  getUserTransactions(userId: number) {
+    this.profileService
+      .getUserTransactions(userId)
+      .then(response => {
+        const transactions = JSON.parse(response._body);
+        this.transactions = transactions;
+        this.completedTransactions = transactions.filter(transaction => {
+          return transaction.status_id === 2
+        });
+        this.getAvailableFunds();
+        console.log(this.availableFunds);
+      })
+      .catch(err => console.log(err));
   }
 
-  selectRentalView() {
-    this.gearView = false;
-    this.rentalView = true;
-    return "active";
+  getAvailableFunds() {
+    let funds = 0;
+    this.completedTransactions.forEach(transaction => {
+      funds += transaction.totalValue
+    });
+    this.availableFunds = funds;
   }
 
   ngOnInit(): void {
