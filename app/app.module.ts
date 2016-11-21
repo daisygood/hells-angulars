@@ -15,7 +15,6 @@ import { Daterangepicker }         from "./components/product-details/daterangep
 import { AddReviewForm }           from "./components/add-review/add-review";
 import { AgmCoreModule }           from "angular2-google-maps/core";
 
-import { AddModalService }         from "./components/add_modal/addModal.service";
 import { About }                   from "./components/about/about.js";
 
 import { App }                     from "./components/app/app.js";
