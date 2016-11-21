@@ -1,7 +1,5 @@
 import { Component }                     from "@angular/core";
 
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-
 @Component({
   moduleId: module.id,
   selector: "ngbd-modal-basic",
@@ -9,29 +7,4 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 })
 export class NgbdModalBasic {
 
-  // public ngbModal.keyboard = "lg";
-  public closeResult: string;
-
-  constructor(private modalService: NgbModal) { }
-
-  // this.modalService.keyboard = "lg";
-
-  public open(content: any) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  // function to determine whether modal was closed by clicking on backdrop, close button, or cross
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
 }

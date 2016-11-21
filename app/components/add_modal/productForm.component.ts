@@ -1,4 +1,4 @@
-import { Component }         from "@angular/core";
+import { Component, Output, EventEmitter }         from "@angular/core";
 import { NewProduct }        from "./newProduct";
 import { NewProductService } from "./newProduct.service";
 
@@ -10,6 +10,8 @@ import { NewProductService } from "./newProduct.service";
 })
 
 export class NewProductForm {
+  @Output()
+  close: EventEmitter<any> = new EventEmitter();
 
   public categories = [ "Backpacking", "Bike", "Surf", "Snowboard", "Ski", "SUP", "Kayak" ];
 
@@ -21,6 +23,13 @@ export class NewProductForm {
     // console.log(model);
     // console.log(this);
     model.userId = JSON.parse(localStorage.getItem("profile")).user_id;
-    this.newProductService.postProduct(model);
+    this.newProductService.postProduct(model)
+        .then(result => {
+          this.close.emit();
+        })
+        .catch(error => {
+          console.log(error);
+        });
   };
+
 }

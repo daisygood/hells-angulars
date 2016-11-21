@@ -86,7 +86,10 @@ module.exports = {
                       FROM ins1`;
 
     pool.query(queryStr, [body.categoryId, body.userId, body.productDescription, body.productName, body.pricePerDay, body.location, body.imageLink], function(err, result) {
-      if (err) return console.log(err);
+      if (err) {
+        res.status(404).send();
+        return;
+      }
       console.log('success', result);
       res.status(201).send('product created');
     });

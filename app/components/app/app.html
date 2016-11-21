@@ -21,7 +21,7 @@
             <a uiSref="profile" uiSrefActive="active">Profile</a>
           </li>
           <li class="nav-item">
-            <a uiSref="addModal" uiSrefActive="active">List Gear</a>
+            <a (click)="open(content)">List Gear</a>
           </li>
           <li class="nav-item">
             <a class="navbar-right float-xs-right" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</a>
@@ -38,3 +38,22 @@
   <p class="footer-content">© 2016 Gear Box</p>
   <a class="footer-content" href="#">About</a>
 </footer>
+
+<template #content ngbModalContainer let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">Product Details</h4>
+  </div>
+  <div class="modal-body">
+
+    <newprod-form #newprod (close)="close()"></newprod-form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="newprod.onSubmit(newprod.model)">Submit</button>
+  </div>
+</template>
+
