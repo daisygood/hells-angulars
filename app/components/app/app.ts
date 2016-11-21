@@ -1,5 +1,7 @@
 import { Auth }                from "../../auth/auth.service";
 import { Component, OnInit }   from "@angular/core";
+
+import { AddModalService }     from "../add_modal/addModal.service";
 import { ProductsService }     from "../products/products.service";
 import { UIROUTER_DIRECTIVES } from "ui-router-ng2";
 
@@ -23,6 +25,7 @@ export class App {
   constructor(
     private auth: Auth,
     private productsService: ProductsService,
+    private addModalService: AddModalService,
     private modalService: NgbModal,
    ) { }
 
@@ -35,31 +38,12 @@ export class App {
     this.auth.findOrCreateUser(localStorage.getItem("profile"));
   }
 
-  // this.modalService.keyboard = "lg";
-
   public open(content: any) {
-    this.modal = this.modalService.open(content);
-    this.modal.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.addModalService.open(content);
   }
 
   public close() {
-    console.log("close fired");
-    this.modal.close("confirmed");
-  }
-
-  // function to determine whether modal was closed by clicking on backdrop, close button, or cross
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
-    } else {
-      return  `with: ${reason}`;
-    }
+    this.addModalService.close();
   }
 
 }

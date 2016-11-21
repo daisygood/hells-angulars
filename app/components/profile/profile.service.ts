@@ -10,7 +10,7 @@ export class ProfileService {
 
   constructor(
     private http: Http,
-    private authHttp: AuthHttp
+    private authHttp: AuthHttp,
   ) {}
 
   public getUserInfo(authId): Promise<any> {

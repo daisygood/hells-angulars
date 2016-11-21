@@ -9,10 +9,10 @@ import { NgbModule }               from "@ng-bootstrap/ng-bootstrap";
 import { NgModule }                from "@angular/core";
 import { UIRouterModule }          from "ui-router-ng2";
 
+import { AddModalService }         from "./components/add_modal/addModal.service"
 import { App }                     from "./components/app/app.js";
 import { Home }                    from "./components/home/home.js";
 import { NewProductForm }          from "./components/add_modal/productForm.component";
-import { NgbdModalBasic }          from "./components/add_modal/addModal";
 import { Products }                from "./components/products/products";
 import { ProductDetails }          from "./components/product-details/product-details";
 import { ProfileComponent }        from "./components/profile/profile.component";
@@ -23,11 +23,11 @@ import { ProductDetailsService }   from "./components/product-details/product-de
 import { ProfileService }          from "./components/profile/profile.service";
 
 import { MyUIRouterConfig }        from "./config/router.config.js";
-import { homeState, productsState, productDetailsState, addProductState, profileState } from "./states.js";
+import { homeState, productsState, productDetailsState, profileState } from "./states.js";
 
-let INITIAL_COMPONENTS =  [ App, Home, Products, ProductDetails, ProfileComponent, NgbdModalBasic, NewProductForm ];
-let INITIAL_PROVIDERS  =  [ ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService ];
-let INITIAL_STATES     =  [ addProductState, homeState, productsState, productDetailsState, profileState ];
+let INITIAL_COMPONENTS =  [ App, Home, Products, ProductDetails, ProfileComponent, NewProductForm ];
+let INITIAL_PROVIDERS  =  [ AddModalService, ProductsService, ProfileService, ProductDetailsService, AUTH_PROVIDERS, NewProductService ];
+let INITIAL_STATES     =  [ homeState, productsState, productDetailsState, profileState ];
 
 @NgModule({
   imports: [

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ProfileService }    from "./profile.service";
 
+import { AddModalService }     from "../add_modal/addModal.service";
+
 @Component({
   moduleId: module.id,
   selector: "profile",
@@ -18,7 +20,8 @@ export class ProfileComponent implements OnInit {
   private stripeAccount: any;
 
   constructor(
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private addModalService: AddModalService
   ) { }
 
   getUserIdFromProfile() {
@@ -73,5 +76,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUserIdFromProfile();
     this.getUserInfo();
+  }
+
+  public open(content: any) {
+    this.addModalService.open(content);
+  }
+
+  public close() {
+    this.addModalService.close();
   }
 }
