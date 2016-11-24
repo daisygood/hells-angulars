@@ -15,14 +15,13 @@ import * as moment from 'moment';
 
 export class DaterangePickerComponent implements AfterViewInit {
 
+
     @Input() options: any = {};
     @Output() selected = new EventEmitter();
 
     constructor(private input: ElementRef, private config: DaterangepickerConfig) { }
 
     ngAfterViewInit() {
-        // $('head').append('<style>'+require('./daterangepicker.css')+'</style>');
-        // $('head').append('<style> rel="stylesheet" href="./app/components/product-detail/daterangepicker/daterangepicker.css" type="text/css" </style>');
 
         let targetOptions: any = Object.assign({}, this.config.settings, this.options);
 

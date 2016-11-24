@@ -22,6 +22,7 @@ export class ProductDetails implements OnInit, DoCheck {
 
   public fromDate: any;
   public toDate: any;
+  private invalidDays: Array<any>;
 
   private minDate: any = {
     "year": new Date().getFullYear(),
@@ -40,12 +41,19 @@ export class ProductDetails implements OnInit, DoCheck {
 
   private userId = JSON.parse(localStorage.getItem("profile")).user_id;
 
+  private isInvalidDate: any = undefined;
+
   constructor(
     private config: NgbRatingConfig,
-    private productDetailsService: ProductDetailsService
+    private productDetailsService: ProductDetailsService,
+    private drpOptions: DaterangepickerConfig
   ) {
     config.max = 5;
     config.readonly = true;
+    this.drpOptions.settings = {
+      opens: "center",
+      // isInvalidDate: function()
+    }
   }
 
   public selectedDate(value: any) {
@@ -67,10 +75,21 @@ export class ProductDetails implements OnInit, DoCheck {
     this.product = this.product[0];
     this.selectedPic = this.product.url[0];
     this.getReviews(this.product.id);
+    this.getInvalidDays(this.product.id);
   }
 
   public onSelect(n: number) {
     this.selectedPic = this.product.url[n];
+  }
+
+  public getInvalidDays(productId: number) {
+    this.productDetailsService
+    .getInvalidDays(productId)
+    .then(response => {
+      const invalidDates = response;
+      this.invalidDays = invalidDates;
+      console.log(this.invalidDays);
+    })
   }
 
   public getReviews(productId: number) {

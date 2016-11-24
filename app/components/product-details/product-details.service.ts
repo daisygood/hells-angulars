@@ -33,6 +33,14 @@ export class ProductDetailsService {
         .catch(this.handleError);
   }
 
+  public getInvalidDays(id: number) {
+    let url = "api/transactions/" + id;
+    return this.http.get(url)
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+  }
+
   public charge(token, transaction) {
     let requestBody = {token: token, transaction: transaction};
     return this.http.post("api/charge", requestBody, {headers: this.headers})
