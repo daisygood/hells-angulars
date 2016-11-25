@@ -34,8 +34,8 @@ export class ProductDetails implements OnInit, DoCheck {
   private numberOfReviews: Number;
   private averageRating: Number;
 
-  private oldFromDate: any = undefined;
-  private oldToDate: any = undefined;
+  // private oldFromDate: any = undefined;
+  // private oldToDate: any = undefined;
   private totalAmount: Number;
   private daysBetween: Number;
 
@@ -52,7 +52,9 @@ export class ProductDetails implements OnInit, DoCheck {
     config.readonly = true;
     this.drpOptions.settings = {
       opens: "center",
-      // isInvalidDate: function()
+      isInvalidDate: function(date: any) {
+        return date.date() > 1;
+      }
     }
   }
 
