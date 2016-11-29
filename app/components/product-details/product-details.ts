@@ -1,10 +1,13 @@
 import { ActivatedRoute }           from "@angular/router";
 import { Component, Input, OnInit, DoCheck } from "@angular/core";
 import { NgbRatingConfig }          from "@ng-bootstrap/ng-bootstrap";
-import { stripeConfig }        from "../../stripe/stripe.config";
+import { stripeConfig }             from "../../stripe/stripe.config";
 import { ProductDetailsService }    from "./product-details.service";
 import { UIROUTER_DIRECTIVES }      from "ui-router-ng2";
-import { DaterangepickerConfig }      from "./daterangepicker/index";
+import { UIRouter }                 from "ui-router-ng2";
+import { DaterangepickerConfig }    from "./daterangepicker/index";
+
+import * as moment from 'moment';
 
 @Component({
   moduleId: module.id,
@@ -22,7 +25,9 @@ export class ProductDetails implements OnInit, DoCheck {
 
   public fromDate: any;
   public toDate: any;
-  private invalidDays: Array<any>;
+  public prodId: any;
+  public invalidDays: Array<any>;
+  public formattedDays: Array<any> = [];
 
   private minDate: any = {
     "year": new Date().getFullYear(),
@@ -46,15 +51,37 @@ export class ProductDetails implements OnInit, DoCheck {
   constructor(
     private config: NgbRatingConfig,
     private productDetailsService: ProductDetailsService,
+    private uiRouter: UIRouter,
     private drpOptions: DaterangepickerConfig
   ) {
+    this.prodId = this.uiRouter.globals.params["productId"];
+    this.getInvalidDays(this.prodId);
+    console.log(this.formattedDays);
+
     config.max = 5;
     config.readonly = true;
+
     this.drpOptions.settings = {
       opens: "center",
       isInvalidDate: function(date: any) {
-        return date.date() > 1;
+        console.log(date);
+        if(date.format('MM-DD-YYYY') == '11-30-2016') {
+          return true;
+        } else {
+          return false;
+        }
       }
+
+      // isInvalidDate: function(date: any) {
+      //   console.log('running invalid dates');
+      //   for(var i = 0; i < this.formattedDays.length; i++) {
+      //     if(date.format('MM-DD-YYYY') == this.formattedDays[i]) {
+      //       return true;
+      //     } else {
+      //       return false;
+      //     }
+      //   }
+      // }
     }
   }
 
@@ -78,6 +105,8 @@ export class ProductDetails implements OnInit, DoCheck {
     this.selectedPic = this.product.url[0];
     this.getReviews(this.product.id);
     this.getInvalidDays(this.product.id);
+    // this.drpOptions.settings.opens = "left";
+    // console.log(this.drpOptions.settings.isInvalidDate);
   }
 
   public onSelect(n: number) {
@@ -91,7 +120,85 @@ export class ProductDetails implements OnInit, DoCheck {
       const invalidDates = response;
       this.invalidDays = invalidDates;
       console.log(this.invalidDays);
+      // format invalid days
+      this.formatInvalidDays(this.invalidDays);
+      // this.drpOptions.settings.isInvalidDate = function(date: any) {
+      //   console.log('running invalid dates');
+      //   for(var i = 0; i < this.formattedDays.length; i++) {
+      //     if(date.format('MM-DD-YYYY') == this.formattedDays[i]) {
+      //       return true;
+      //     } else {
+      //       return false;
+      //     }
+      //   }
+      // }
+      // this.drpOptions.settings.isInvalidDate();
     })
+  }
+
+  public formatInvalidDays(days: Array<any>) {
+
+    let oneDay = 1000 * 60 * 60 * 24;
+    console.log(days.length);
+
+    // days.forEach(function(day: any) {
+    for(var i = 0; i < days.length; i++) {
+      console.log(days);
+      // console.log(day.bookedto.slice(0, 10));
+      let from = moment(days[i].bookedfrom);
+      let to = moment(days[i].bookedto);
+      let diffMs = to - from;
+      let numDays = Math.round(diffMs / oneDay);
+
+      let currentDay = from;
+
+      do {
+        this.formattedDays.push(currentDay.format("MM-DD-YYYY"));
+        currentDay = currentDay.add(1, 'd');
+        numDays--;
+      } while (numDays > 0);
+
+      console.log(this.formattedDays);
+      let context = this;
+      // console.log(from.format("DD-MM-YYYY"));
+      // let nextDay = from.add(1, 'd');
+      // console.log(nextDay.format("DD-MM-YYYY"));
+
+      // returns milliseconds
+      // console.log(to - from);
+      // let to = (day.bookedto.slice(0, 10));
+      // let daysBetween =
+      // console.log(from, to);
+      // console.log(from + oneDay);
+      // let daysBetween = (to - from) / oneDay;
+      // console.log(daysBetween);
+      // while(daysBetween !== 0) {
+      // this.formattedDays.push(from, to);
+      // if(to.format('YYYY-MM-DD') == to) {
+      //   return true;
+      // }
+    }
+    // this.drpOptions.settings = {
+    //   opens: "center",
+    //   isInvalidDate: function(date: any) {
+    //     console.log('running invalid dates', context.formattedDays.length);
+    //     for(var i = 0; i < context.formattedDays.length; i++) {
+    //       if(date.format('MM-DD-YYYY') == context.formattedDays[i]) {
+    //         return true;
+    //       } else {
+    //         return false;
+    //       }
+    //     }
+    //   }
+    // }
+      // this.drpOptions.settings.isInvalidDate = function(date: any) {
+      //   if(date.format('MM-DD-YYYY') == '11-30-2016') {
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // }
+  // this.drpOptions.settings.isInvalidDate();    // this.drpOptions.settings.isInvalidDate();
   }
 
   public getReviews(productId: number) {

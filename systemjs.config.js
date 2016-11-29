@@ -31,7 +31,6 @@ var ng2Pkgs = ['core', 'compiler', 'common', 'http', 'platform-browser-dynamic',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       'appModule': "./dist/app.module.js",
       'ui-router-ng2': 'https://unpkg.com/ui-router-ng2@' + uirVer + '/_bundles/ui-router-ng2',
-
       '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
       'angular2-jwt': 'npm:angular2-jwt/angular2-jwt.js',
       'angular2-google-maps/core': 'npm:angular2-google-maps/core/core.umd.js',
